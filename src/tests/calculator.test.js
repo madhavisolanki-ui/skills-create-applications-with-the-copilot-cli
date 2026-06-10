@@ -62,4 +62,35 @@ describe('CLI calculator', () => {
     expect(errorSpy).toHaveBeenCalled()
     expect(process.exitCode).toBe(4)
   })
+
+  // Extended operations from feature request
+  test('modulo: mod 5 2 -> 1', () => {
+    main(['mod', '5', '2'])
+    expect(logSpy).toHaveBeenCalledWith(1)
+    expect((process.exitCode ?? 0)).toBe(0)
+  })
+
+  test('modulo by zero returns error', () => {
+    main(['mod', '5', '0'])
+    expect(errorSpy).toHaveBeenCalledWith('Error: modulo by zero')
+    expect((process.exitCode ?? 0)).toBe(3)
+  })
+
+  test('power: pow 2 3 -> 8', () => {
+    main(['pow', '2', '3'])
+    expect(logSpy).toHaveBeenCalledWith(8)
+    expect((process.exitCode ?? 0)).toBe(0)
+  })
+
+  test('square root: sqrt 16 -> 4', () => {
+    main(['sqrt', '16'])
+    expect(logSpy).toHaveBeenCalledWith(4)
+    expect((process.exitCode ?? 0)).toBe(0)
+  })
+
+  test('square root of negative number returns error', () => {
+    main(['sqrt', '-9'])
+    expect(errorSpy).toHaveBeenCalledWith('Error: square root of negative number')
+    expect((process.exitCode ?? 0)).toBe(5)
+  })
 })
