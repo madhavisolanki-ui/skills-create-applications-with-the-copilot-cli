@@ -58,7 +58,7 @@ describe('CLI calculator', () => {
   })
 
   test('unknown command prints usage and sets exit code', () => {
-    main(['pow', '2', '3'])
+    main(['foo', '2', '3'])
     expect(errorSpy).toHaveBeenCalled()
     expect(process.exitCode).toBe(4)
   })
